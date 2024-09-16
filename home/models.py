@@ -49,3 +49,10 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+class Images(models.Model):
+    images = models.ImageField(upload_to='media')
+    product = models.ForeignKey(Product,on_delete=models.CASCADE)
+
+class Tags(models.Model):
+    name = models.CharField(max_length=200)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
