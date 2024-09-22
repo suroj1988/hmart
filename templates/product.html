@@ -27,12 +27,12 @@
                                 <div class="header-bottom-set dropdown">
                                     <button class="dropdown-toggle header-action-btn" data-bs-toggle="dropdown">Default <i class="fa fa-angle-down"></i></button>
                                     <ul class="dropdown-menu dropdown-menu-right">
-                                        <li><a class="dropdown-item" href="#">Name, A to Z</a></li>
-                                        <li><a class="dropdown-item" href="#">Name, Z to A</a></li>
-                                        <li><a class="dropdown-item" href="#">Price, low to high</a></li>
-                                        <li><a class="dropdown-item" href="#">Price, high to low</a></li>
-                                        <li><a class="dropdown-item" href="#">Sort By new</a></li>
-                                        <li><a class="dropdown-item" href="#">Sort By old</a></li>
+                                        <li><a class="dropdown-item" href="/shop/{% for i in shops %}?AtoZ={{i.slug}}{% endfor %}">Name, A to Z</a></li>
+                                        <li><a class="dropdown-item" href="/shop/{% for i in shops %}?ZtoA={{i.slug}}{% endfor %}">Name, Z to A</a></li>
+                                        <li><a class="dropdown-item" href="/shop/{% for i in shops %}?LtoH={{i.id}}{% endfor %}">Price, low to high</a></li>
+                                        <li><a class="dropdown-item" href="/shop/{% for i in shops %}?HtoL={{i.id}}{% endfor %}">Price, high to low</a></li>
+                                        <li><a class="dropdown-item" href="/shop/{% for i in shops %}?New_product={{i.id}}{% endfor %}">Sort By New</a></li>
+                                        <li><a class="dropdown-item" href="/shop/{% for i in shops %}?Hot_product={{i.id}}{% endfor %}">Sort By Hot</a></li>
                                     </ul>
                                 </div>
                                 <!-- Single Wedge Start -->
@@ -57,13 +57,13 @@
                                                         </span>
                                                         <div class="thumb">
                                                             <a href="single-product.html" class="image">
-                                                                <img src="{{i.image.url}}" alt="Product" />
+                                                                <img src="{{i.image.url}}" alt="Product" style="height:200px;"  />
                                                                 <img class="hover-image" src="{{i.image.url}}" alt="Product" />
                                                             </a>
                                                         </div>
                                                         <div class="content">
                                                             <span class="category"><a href="#">{{i.category}}</a></span>
-                                                            <h5 class="title"><a href="single-product.html">{{i.name | truncatewords:3}}
+                                                            <h5 class="title"><a href="single-product.html">{{i.name|truncatewords:2}}
                                                                 </a>
                                                             </h5>
                                                             <span class="price">
@@ -97,7 +97,7 @@
                                                         <div class="product">
                                                             <div class="thumb">
                                                                 <a href="single-product.html" class="image">
-                                                                    <img src="{{i.image.url}}" alt="Product" />
+                                                                    <img src="{{i.image.url}}" alt="Product" style="height:200px;"  />
                                                                     <img class="hover-image" src="{{i.image.url}}" alt="Product" />
                                                                 </a>
                                                                 <span class="badges">
@@ -110,7 +110,7 @@
                                                         <div class="content-desc-wrap">
                                                             <div class="content">
                                                                 <span class="category"><a href="#">{{i.category}}</a></span>
-                                                                <h5 class="title"><a href="single-product.html">{{i.name | truncatewords:3}}</a></h5>
+                                                                <h5 class="title"><a href="single-product.html">{{i.name|truncatewords:3}}</a></h5>
                                                                 <p>{{i.description | truncatewords:3}}</p>
                                                             </div>
                                                             <div class="box-inner">
@@ -217,16 +217,13 @@
                                 <h4 class="sidebar-title">Size</h4>
                                 <div class="sidebar-widget-size">
                                     <ul>
-                                        <li><a href="#" class="selected m-0"> All
+                                        <li><a href="/shop" class="selected m-0"> All
                                                 <span>(6)</span> </a></li>
-                                        <li><a href="#" class=""> S <span>(12)</span> </a>
+                                        {% for b in brands %}
+                                        <li><a href="/shop/?brand={{b.id}}" class="">{{b.name}}</a>
                                         </li>
-                                        <li><a href="#" class=""> M <span>(21)</span> </a>
-                                        </li>
-                                        <li><a href="#" class=""> L <span>(16)</span> </a>
-                                        </li>
-                                        <li><a href="#" class=""> XL <span>(22)</span> </a>
-                                        </li>
+                                        {% endfor %}
+
                                     </ul>
                                 </div>
                             </div>

@@ -613,7 +613,8 @@
         <!-- Footer Area End -->
     </div>
     <!-- Modal -->
-    <div class="modal modal-2 fade" id="exampleModal" tabindex="-1" role="dialog">
+    {% for j in products %}
+    <div class="modal modal-2 fade" id="exampleModal-{{forloop.counter}}" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-body">
@@ -623,40 +624,22 @@
                             <!-- Swiper -->
                             <div class="swiper-container gallery-top">
                                 <div class="swiper-wrapper">
+                                    {% for img in j.images_set.all %}
                                     <div class="swiper-slide">
-                                        <img class="img-responsive m-auto" src="assets/images/product-image/zoom-image/1.webp" alt="">
+                                        <img class="img-responsive m-auto" src="{{img.images.url}}" alt="">
                                     </div>
-                                    <div class="swiper-slide">
-                                        <img class="img-responsive m-auto" src="assets/images/product-image/zoom-image/2.webp" alt="">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img class="img-responsive m-auto" src="assets/images/product-image/zoom-image/3.webp" alt="">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img class="img-responsive m-auto" src="assets/images/product-image/zoom-image/4.webp" alt="">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img class="img-responsive m-auto" src="assets/images/product-image/zoom-image/5.webp" alt="">
-                                    </div>
+                                    {% endfor %}
+
                                 </div>
                             </div>
                             <div class="swiper-container gallery-thumbs mt-20px slider-nav-style-1 small-nav">
                                 <div class="swiper-wrapper">
+                                    {% for img in j.images_set.all %}
                                     <div class="swiper-slide">
-                                        <img class="img-responsive m-auto" src="assets/images/product-image/small-image/1.webp" alt="">
+                                        <img class="img-responsive m-auto" src="{{img.images.url}}" alt="">
                                     </div>
-                                    <div class="swiper-slide">
-                                        <img class="img-responsive m-auto" src="assets/images/product-image/small-image/2.webp" alt="">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img class="img-responsive m-auto" src="assets/images/product-image/small-image/3.webp" alt="">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img class="img-responsive m-auto" src="assets/images/product-image/small-image/4.webp" alt="">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img class="img-responsive m-auto" src="assets/images/product-image/small-image/5.webp" alt="">
-                                    </div>
+                                    {% endfor %}
+
                                 </div>
                                 <!-- Add Arrows -->
                                 <div class="swiper-buttons">
@@ -667,10 +650,14 @@
                         </div>
                         <div class="col-lg-6 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="200">
                             <div class="product-details-content quickview-content">
-                                <h2>Modern Smart Phone</h2>
+                                <h2>{{j.name|truncatewords:8}}</h2>
                                 <div class="pricing-meta">
                                     <ul class="d-flex">
-                                        <li class="new-price">$20.90</li>
+                                        <li class="new-price">{%  if i.discounted_price > 0 %}
+                                            {{i.discounted_price}}
+                                            {% else %}
+                                            {{i.price}}
+                                            {% endif %}</li>
                                     </ul>
                                 </div>
                                 <div class="pro-details-rating-wrap">
@@ -683,7 +670,7 @@
                                     </div>
                                     <span class="read-review"><a class="reviews" href="#">( 2 Review )</a></span>
                                 </div>
-                                <p class="mt-30px">Lorem ipsum dolor sit amet, consecte adipisicing elit, sed do eiusmll tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mill veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip exet commodo consequat. Duis aute irure dolor</p>
+                                <p class="mt-30px">{{j.description|truncatewords:20}}</p>
                                 <div class="pro-details-categories-info pro-details-same-style d-flex m-0">
                                     <span>SKU:</span>
                                     <ul class="d-flex">
@@ -696,22 +683,20 @@
                                     <span>Categories: </span>
                                     <ul class="d-flex">
                                         <li>
-                                            <a href="#">Smart Device, </a>
+                                            <a href="#">{{j.category}}, </a>
                                         </li>
-                                        <li>
-                                            <a href="#">ETC</a>
-                                        </li>
+
                                     </ul>
                                 </div>
                                 <div class="pro-details-categories-info pro-details-same-style d-flex m-0">
                                     <span>Tags: </span>
                                     <ul class="d-flex">
+                                        {% for tag in j.tags_set.all %}
                                         <li>
-                                            <a href="#">Smart Device, </a>
+                                            <a href="#">{{tag.name}} , </a>
                                         </li>
-                                        <li>
-                                            <a href="#">Phone</a>
-                                        </li>
+                                        {% endfor %}
+
                                     </ul>
                                 </div>
                                 <div class="pro-details-quality">
@@ -736,6 +721,7 @@
             </div>
         </div>
     </div>
+    {% endfor %}
     <!-- Modal end -->
     <!-- Modal Cart -->
     <div class="modal customize-class fade" id="exampleModal-Cart" tabindex="-1"   aria-hidden="true">

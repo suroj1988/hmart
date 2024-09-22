@@ -120,13 +120,13 @@
                                     </span>
                                     <div class="thumb">
                                         <a href="single-product.html" class="image">
-                                            <img src="{{i.image.url}}" alt="Product" />
+                                            <img src="{{i.image.url}}" alt="Product" style="height:200px;" />
                                             <img class="hover-image" src="{{i.image.url}}" alt="Product" />
                                         </a>
                                     </div>
                                     <div class="content">
                                         <span class="category"><a href="#">{{i.category}}</a></span>
-                                        <h5 class="title"><a href="single-product.html">{{i.name |truncatewords:3}}
+                                        <h5 class="title"><a href="single-product.html">{{i.name | truncatewords:3}}
                                             </a>
                                         </h5>
                                         <span class="price">
@@ -142,7 +142,7 @@
                                                     class="pe-7s-shopbag"></i></button>
                                                 <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
                                                         class="pe-7s-like"></i></button>
-                                                <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
+                                                <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal-{{forloop.counter}}"><i class="pe-7s-look"></i></button>
                                                 <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
                                                         class="pe-7s-refresh-2"></i></button>
                                             </div>
