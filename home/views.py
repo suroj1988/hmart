@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views.generic import View
 from .models import *
 
@@ -48,3 +48,19 @@ class Shop(Base):
             self.views['shops'] = Product.objects.all()
 
         return render(request, 'product.html',self.views)
+
+class Search(Base):
+    def get(self,request):
+        if request.method == "GET":
+            query = request.GET.get("query")
+            if query == "":
+                return redirect("/")
+            else:
+                self.views['searchproducts'] = Product.objects.filter(name__icontains=query)
+
+        return render(request,'search.html',self.views)
+class ProductDetail(Base):
+    def get(self,request,slug):
+        self.views
+        self.views['detail_products'] = Product.objects.filter(slug=slug)
+        return render(request,'product-detail.html',self.views)
