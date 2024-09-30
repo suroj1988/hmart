@@ -64,3 +64,22 @@ class ProductDetail(Base):
         self.views
         self.views['detail_products'] = Product.objects.filter(slug=slug)
         return render(request,'product-detail.html',self.views)
+
+def Contact(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        message = request.POST.get("message")
+        subject = request.POST.get("subject")
+        date = request.POST.get("date")
+
+        contact = Contact_us.objects.create(
+            name = name,
+            email = email,
+            message = message,
+            subject = subject,
+            date = date,
+        )
+        contact.save()
+        return redirect("/")
+    return render(request,'contact.html')
